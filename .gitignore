@@ -13,4 +13,5 @@ target/
 *.swo
 .env
 .env.*
+!.env.example
 /data/
