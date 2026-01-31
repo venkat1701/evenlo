@@ -1,13 +1,16 @@
 package com.evenlo.repository;
 
+import com.evenlo.model.Event;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
-public interface AnalyticsRepository extends Repository<Object, UUID> {
+
+public interface AnalyticsRepository extends JpaRepository<Event, UUID> {
 	@Query(
 			value = "SELECT e.id AS eventId, e.title AS title, COUNT(b.id) AS bookingsCount, COALESCE(SUM(CASE WHEN b.status = 'CONFIRMED' THEN b.total_amount_paise ELSE 0 END), 0) AS revenuePaise " +
 					"FROM events e " +
